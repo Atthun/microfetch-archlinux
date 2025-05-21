@@ -17,6 +17,20 @@ Stupidly simple, laughably fast fetch tool. But the Arch Linux version...
 
 ## Installation
 
+Manual installation:-
+
+```sh
+git clone https://github.com/Atthun/microfetch-archlinux`
+cd microfetch-archlinux
+cargo build --release
+sudo mv target/release/microfetch /usr/bin/microfetch
+```
+
+1. `git clone https://github.com/Atthun/microfetch-archlinux` Clone the repository
+2. `cd microfetch-archlinux` Change directory into the repository
+3. `cargo build --release` Build it using cargo to obtain the binary. The `--release` is used to specify the build profile, release is recommended for normal users.
+4. You can now either move the binary using `sudo mv target/release/microfetch /usr/bin/microfetch` or write a PKGBUILD to install it using `pacman`.
+
 > [!NOTE]
 > You will need a Nerdfonts patched font installed, and for your terminal
 > emulator to support said font. Microfetch uses nerdfonts glyphs by default.
