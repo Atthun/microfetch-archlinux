@@ -1,40 +1,38 @@
 [package]
-name = "microfetch"
+name = "microfetch-archlinux"
 version = "0.4.8"
 edition = "2024"
 
-[lib]
-name = "microfetch_lib"
-path = "src/lib.rs"
+[dependencies]
+libc = "0.2"
+lazy_static = "1.5"
+nix = { version = "0.30", features = ["fs", "hostname", "feature"] }
+
+[dev-dependencies]
+criterion = "0.5"
 
 [[bin]]
 name = "microfetch"
 path = "src/main.rs"
 
-[dependencies]
-nix = { version = "0.30", features = ["fs", "hostname", "feature"] }
-lazy_static = "1.5"
-libc = "0.2"
-
-[dev-dependencies]
-criterion = "0.5"
+[lib]
+name = "microfetch_lib"
+path = "src/lib.rs"
 
 [[bench]]
 name = "benchmark"
 harness = false
 
 [profile.dev]
+lto = true
+strip = true
 opt-level = 3
+codegen-units = 1
 
 [profile.release]
-strip = true
-opt-level = "s"
 lto = true
-codegen-units = 1
+strip = true
+debug = false
+opt-level = 3
 panic = "abort"
-
-[profile.profiler]
-inherits = "release"
-debug = true
-split-debuginfo = "unpacked"
-strip = "none"
+codegen-units = 1

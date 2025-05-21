@@ -33,10 +33,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-// Struct to hold all the fields we need to print
-// helps avoid clippy warnings about argument count
-// and makes it easier to pass around, though its
-// not like we need to
 struct Fields {
     user_info: String,
     os_name: String,
@@ -67,16 +63,16 @@ fn print_system_info(fields: &Fields) -> Result<(), Box<dyn std::error::Error>> 
     let cyan = COLORS.cyan;
     let blue = COLORS.blue;
     let reset = COLORS.reset;
-    let system_info = format!("
-    {cyan}     ▟█▖    {blue}▝█▙ ▗█▛          {user_info} ~{reset}
-    {cyan}  ▗▄▄▟██▄▄▄▄▄{blue}▝█▙█▛  {cyan}▖        {cyan}  {blue}System{reset}        {os_name}
-    {cyan}  ▀▀▀▀▀▀▀▀▀▀▀▘{blue}▝██  {cyan}▟█▖       {cyan}  {blue}Kernel{reset}        {kernel_version}
-    {blue}     ▟█▛       {blue}▝█▘{cyan}▟█▛        {cyan}  {blue}Shell{reset}         {shell}
-    {blue}▟█████▛          {cyan}▟█████▛     {cyan}  {blue}Uptime{reset}        {uptime}
-    {blue}   ▟█▛{cyan}▗█▖       {cyan}▟█▛          {cyan}  {blue}Desktop{reset}       {desktop}
-    {blue}  ▝█▛  {cyan}██▖{blue}▗▄▄▄▄▄▄▄▄▄▄▄       {cyan}  {blue}Memory{reset}        {memory_usage}
-    {blue}   ▝  {cyan}▟█▜█▖{blue}▀▀▀▀▀██▛▀▀▘       {cyan}󱥎  {blue}Storage (/){reset}   {storage}
-    {cyan}     ▟█▘ ▜█▖    {blue}▝█▛          {cyan}  {blue}Colors{reset}        {colors}\n");
-
-    Ok(stdout().write_all(system_info.as_bytes())?)
+    let system_info = format!(r"
+    {cyan}                    {user_info} ~{reset}
+    {cyan}       /\           {cyan}  {blue}System{reset}        {os_name}
+    {cyan}      /  \          {cyan}  {blue}Kernel{reset}        {kernel_version}
+    {cyan}     /\   \         {cyan}  {blue}Shell{reset}         {shell}
+    {cyan}    /    - \        {cyan}  {blue}Uptime{reset}        {uptime}
+    {cyan}   /   ''   \       {cyan}  {blue}Desktop{reset}       {desktop}
+    {cyan}  /-  |  |  -\      {cyan}  {blue}Memory{reset}        {memory_usage}
+    {cyan} /_-''    ''-_\     {cyan}󱥎  {blue}Storage (/){reset}   {storage}
+    {cyan}                    {cyan}  {blue}Colors{reset}        {colors}
+    ");
+    Ok(stdout().write_all(format!("{}\n", system_info).as_bytes())?)
 }
