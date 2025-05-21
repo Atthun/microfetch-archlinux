@@ -1,9 +1,9 @@
 [package]
 name = "microfetch-archlinux"
-authors = ["NotAShelf <raf@notashelf.dev>", "Atthun Seeran R.A <idkatthun@gmail.com>"]
-description = "Microscopic fetch tool in Rust with special emphasis on speed."
 version = "0.4.8"
 edition = "2024"
+authors = ["NotAShelf <raf@notashelf.dev>", "Atthun Seeran R.A <idkatthun@gmail.com>"]
+description = "Microscopic fetch tool in Rust with special emphasis on speed."
 
 [dependencies]
 libc = "0.2"
